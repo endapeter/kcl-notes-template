@@ -1,0 +1,198 @@
+% LaTeX Notes Template for King's College London Physics classes
+% Created by Enda Shi (enda.shi@kcl.ac.uk)
+% Version 2026-05-08
+
+\documentclass[10pt,oneside]{memoir}
+
+\newif\ifkindle
+\newif\ifphone
+\newif\ifafour
+
+% Select display format
+\kindletrue
+%\phonetrue
+%\afourtrue
+
+\ifkindle
+  %% Page layout for Kindle-style output
+  \setstocksize{6.4in}{4.8in}
+  \settrimmedsize{\stockheight}{\stockwidth}{*}
+  \settypeblocksize{5in}{4in}{*}
+\fi
+
+\ifphone
+  %% Page layout for Phone-style output
+  \setstocksize{10.4in}{4.8in}
+  \settrimmedsize{\stockheight}{\stockwidth}{*}
+  \settypeblocksize{9.0in}{4in}{*}
+\fi
+
+\ifafour
+  %% Page layout for standard A4 output
+  \setstocksize{297mm}{210mm} % A4 dimensions
+  \settrimmedsize{\stockheight}{\stockwidth}{*}
+  \settypeblocksize{22cm}{15cm}{*}
+\fi
+
+\setlrmargins{*}{*}{1}
+\setulmargins{*}{*}{1}
+\checkandfixthelayout
+
+
+% Fonts 
+\usepackage[T1]{fontenc}
+\usepackage[british]{babel}
+\usepackage{lmodern}
+\usepackage{anyfontsize}
+\usepackage[scaled]{beramono}
+\usepackage[final]{microtype}
+\renewcommand{\sfdefault}{phv}
+
+
+% Other packages
+\usepackage{amsmath, amssymb, amsthm, mathtools, mathrsfs, thmtools, siunitx}
+\usepackage{graphicx}
+\graphicspath{{figures/}}
+\usepackage{csquotes, textcomp, listings}
+\lstset{basicstyle=\ttfamily, frame=tb}
+\usepackage[most]{tcolorbox} 
+
+
+% Custom Macros
+\newcommand{\memorize}[1]{%
+    \begin{tcolorbox}[
+        colframe=red,
+        colback=red!10,
+        title={MEMORIZE THIS},
+        fonttitle=\sffamily\scriptsize\bfseries,
+        coltitle=white,
+	center title
+    ]
+        #1
+    \end{tcolorbox}%
+}
+
+% Theorem environments
+\declaretheorem[style=plain,numberwithin=chapter]{theorem}
+\declaretheorem[style=plain,sibling=theorem]{corollary}
+\declaretheorem[style=plain,sibling=theorem]{lemma}
+\declaretheorem[style=plain,sibling=theorem]{proposition}
+\declaretheorem[style=definition,sibling=theorem]{definition}
+\declaretheorem[style=definition,sibling=theorem]{example}
+\declaretheorem[style=remark,numbered=no]{remark}
+\renewcommand{\qedsymbol}{\(\blacksquare\)}
+
+% Delimiters
+\DeclarePairedDelimiter{\p}{\lparen}{\rparen}
+\DeclarePairedDelimiter{\set}{\lbrace}{\rbrace}
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+
+% Operators
+\newcommand{\diff}{\mathop{}\!\mathrm{d}}
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\E}{E}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Cov}{Cov}
+
+% Blackboard bold shortcuts
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\A}{\mathbb{A}}
+\renewcommand{\P}{\mathbb{P}}
+
+
+% Cross-referencing
+\usepackage{varioref}
+\usepackage[pdfusetitle]{hyperref}
+\urlstyle{sf}
+\usepackage[nameinlink,capitalize,noabbrev]{cleveref}
+\crefname{chapter}{Section}{Sections}
+
+
+% Front Page Setup
+\makeatletter
+\newcommand{\coursecode}[1]{\def\@coursecode{#1}}
+\newcommand{\lecturer}[1]{\def\@lecturer{#1}}
+
+\newcommand{\makefrontpage}{
+    \begin{titlingpage}
+        \sffamily 
+        \raggedright 
+
+        \vspace*{1in} 
+
+        {\fontsize{24}{28}\selectfont \@coursecode \par}
+        \vspace{0.2cm}
+        {\fontsize{32}{38}\selectfont\bfseries \@title \par}
+        \vspace{0.4cm}
+        {\fontsize{16}{20}\selectfont \@lecturer \par}
+
+        \vspace{1in}
+
+	{\fontsize{16}{20}\selectfont Course Notes by \textbf{\@author} \par}
+
+        \vfill 
+    \end{titlingpage}
+}
+\makeatother
+
+
+% Chapter Style Setup
+\makechapterstyle{lecture}{
+    \renewcommand{\chapnamefont}{\sffamily\Large\bfseries}
+    \renewcommand{\chapnumfont}{\sffamily\Large\bfseries}
+    \renewcommand{\chaptitlefont}{\sffamily\Huge\bfseries}
+    
+    % Change "Chapter" to "LECTURE"
+    \renewcommand{\printchaptername}{\chapnamefont LECTURE}
+    \renewcommand{\chapternamenum}{\space}
+    \renewcommand{\printchapternum}{\chapnumfont \thechapter}
+    
+    % Spacing between "LECTURE #" and the actual title
+    \renewcommand{\afterchapternum}{\par\nobreak\vspace{1ex}}
+    
+    % Title formatting
+    \renewcommand{\printchaptertitle}[1]{\chaptitlefont ##1}
+}
+\chapterstyle{lecture} % Apply the chapter style
+
+% Page Style Setup
+\makepagestyle{lecturepage}
+
+\makeevenhead{lecturepage}{\sffamily\bfseries lecture \thechapter\ $\cdot$ \leftmark}{}{\sffamily\bfseries \thepage}
+\makeoddhead{lecturepage}{\sffamily\bfseries lecture \thechapter\ $\cdot$ \leftmark}{}{\sffamily\bfseries \thepage}
+
+\makeheadrule{lecturepage}{\textwidth}{0.5pt}
+
+\makeevenfoot{lecturepage}{}{}{}
+\makeoddfoot{lecturepage}{}{}{}
+
+\makepsmarks{lecturepage}{
+    \nouppercaseheads
+    \createmark{chapter}{left}{nonumber}{}{}
+}
+\pagestyle{lecturepage} % Apply the page style
+
+
+% Document Metadata
+\title{Electromagnetism}
+\coursecode{5CCP2380}
+\author{Enda Shi}
+\lecturer{Samjid Mannan}
+
+\begin{document}
+\makefrontpage
+
+\chapter{Introduction}
+Some sample text\ldots
+
+\[
+	\int_{0}^{\infty} 3x \diff x
+.\] 
+
+\end{document}
