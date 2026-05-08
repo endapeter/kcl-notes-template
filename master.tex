@@ -59,18 +59,56 @@
 
 
 % Custom Macros
-\newcommand{\memorize}[1]{%
+\definecolor{denimblue}{HTML}{24496B}
+\definecolor{venetianred}{HTML}{C80815} 
+\newcommand{\keypoint}[1]{%
     \begin{tcolorbox}[
-        colframe=red,
-        colback=red!10,
-        title={MEMORIZE THIS},
+        colback=venetianred!20,
+        colframe=venetianred!20,
+        boxrule=0pt,   
+        arc=3pt,      
+        boxsep=0pt,  
+        left=8pt,   
+        right=8pt, 
+        top=8pt,  
+        bottom=8pt,              
+        colbacktitle=venetianred!70,       
+        coltitle=white,        
         fonttitle=\sffamily\scriptsize\bfseries,
-        coltitle=white,
-	center title
+        title={KEY POINT},    
+        toptitle=4pt,        
+        bottomtitle=4pt,    
+        lefttitle=4pt,     
+        righttitle=4pt
     ]
         #1
     \end{tcolorbox}%
 }
+
+\newcommand{\examtip}[1]{%
+    \begin{tcolorbox}[
+        colback=denimblue!20,
+        colframe=denimblue!20,
+        boxrule=0pt,   
+        arc=3pt,      
+        boxsep=0pt,  
+        left=8pt,   
+        right=8pt, 
+        top=8pt,  
+        bottom=8pt,              
+        colbacktitle=denimblue!70,       
+        coltitle=white,        
+        fonttitle=\sffamily\scriptsize\bfseries,
+        title={EXAM TIP},    
+        toptitle=4pt,        
+        bottomtitle=4pt,    
+        lefttitle=4pt,     
+        righttitle=4pt
+    ]
+        #1
+    \end{tcolorbox}%
+}
+
 
 % Theorem environments
 \declaretheorem[style=plain,numberwithin=chapter]{theorem}
@@ -194,5 +232,18 @@ Some sample text\ldots
 \[
 	\int_{0}^{\infty} 3x \diff x
 .\] 
+
+\keypoint{
+	\[
+	\sum_{n=1}^{\infty} a_n z^n
+	.\] 
+}
+
+\examtip{
+	Memorize how to derive
+\[
+	\Delta \phi = k \Delta r = \Delta k r = \frac{2\pi \Delta n}{\lambda} r
+.\] 
+}
 
 \end{document}
