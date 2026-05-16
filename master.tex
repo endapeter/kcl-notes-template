@@ -197,7 +197,12 @@
     % Title formatting
     \renewcommand{\printchaptertitle}[1]{\chaptitlefont ##1}
 }
-\chapterstyle{lecture} % Apply the chapter style
+\chapterstyle{lecture}
+
+% Section and Subsection Style Setup
+\setsecheadstyle{\sffamily\Large\bfseries\raggedright}
+\setsubsecheadstyle{\sffamily\large\bfseries\raggedright}
+\setsubsubsecheadstyle{\sffamily\normalsize\bfseries\raggedright}
 
 % Page Style Setup
 \makepagestyle{lecturepage}
